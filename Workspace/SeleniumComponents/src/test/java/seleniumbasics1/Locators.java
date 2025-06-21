@@ -3,18 +3,18 @@ package seleniumbasics1;
 import framework.BrowserUtils;
 import framework.SeleniumUtils;
 import framework.constants.BrowserTypes;
-import framework.constants.PathUtils;
+import framework.PathUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-public class Locatorspractise {
+public class Locators {
 
     public WebDriver driver = null;
 
     @Test
-    public void locators1() throws InterruptedException {
+    public void locatorsUseCase1() throws InterruptedException {
 
         //Call enum and get browser value->Call getDriver() to initialize driver
         driver = BrowserUtils.getDriver(BrowserTypes.CHROME.getBrowser());
@@ -51,7 +51,7 @@ public class Locatorspractise {
     }
 
     @Test
-    public void locators2() {
+    public void locatorsUseCase2() {
 
         BrowserUtils.killExistingBrowsers();
 
@@ -63,18 +63,17 @@ public class Locatorspractise {
         //Using Utils class object call the utilities methods
         seleniumUtils.launchApp("https://www.cricbuzz.com/");
 
-        WebElement lnk_teams=driver.findElement(By.linkText("Teams"));
-        seleniumUtils.clickOnElement(lnk_teams,"Team link");
+        WebElement lnk_teams = driver.findElement(By.linkText("Teams"));
+        seleniumUtils.clickOnElement(lnk_teams, "Team link");
 
         //PathUtils.applySleep(3000);
 
-        WebElement lnk_australia=driver.findElement(By.linkText("Australia"));
-        seleniumUtils.clickOnElement(lnk_australia,"Australia Team link");
+        WebElement lnk_australia = driver.findElement(By.linkText("Australia"));
+        seleniumUtils.clickOnElement(lnk_australia, "Australia Team link");
 
         PathUtils.applySleep(3000);
 
         seleniumUtils.closeBrowser();
-
 
 
     }

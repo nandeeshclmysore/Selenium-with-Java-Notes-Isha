@@ -4,7 +4,7 @@ import framework.BrowserUtils;
 import framework.Reports;
 import framework.SeleniumUtils;
 import framework.constants.BrowserTypes;
-import framework.constants.PathUtils;
+import framework.PathUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

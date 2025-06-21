@@ -18,6 +18,7 @@ public class BrowserUtils {
         Runtime.getRuntime().exec("TASKKILL -f -im firefoxdriver.exe /T");
         Runtime.getRuntime().exec("TASKKILL -f -im edgedriver.exe /T");
     }
+
     public WebDriver getDriver(String browser) {
         return switch (browser.toUpperCase()) {
             case "CHROME" -> new ChromeDriver();

@@ -1,45 +1,19 @@
 package seleniumbasics1;
 
-import framework.BrowserUtils;
-import framework.SeleniumUtils;
-import framework.constants.BrowserTypes;
-import framework.constants.PathUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 import java.util.Set;
 
-public class SeleniumCommands1 {
+public class TabsAndWindowHandles {
 
     public WebDriver driver = null;
-    @Test
-    public void launchBrowser() throws InterruptedException {
-
-
-        String browser = "chrome";
-
-        if (browser.equalsIgnoreCase("chrome")) {
-            driver = new ChromeDriver();
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            driver = new FirefoxDriver();
-        } else if (browser.equalsIgnoreCase("edge")) {
-            driver = new EdgeDriver();
-        }
-
-        driver.manage().window().maximize();
-        driver.get("https://www.google.com");
-        Thread.sleep(3000);
-        driver.quit();
-    }
 
     @Test
     public void handlingNewTabsAndSwicthtoSpecifcTab() throws InterruptedException {
+
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
 
@@ -95,9 +69,6 @@ public class SeleniumCommands1 {
         driver.quit();
 
     }
-
-
-
 
 
 }

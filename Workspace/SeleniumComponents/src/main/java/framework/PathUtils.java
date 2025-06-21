@@ -1,4 +1,4 @@
-package framework.constants;
+package framework;
 
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;

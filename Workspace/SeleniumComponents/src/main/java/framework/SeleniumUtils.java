@@ -13,6 +13,8 @@ public class SeleniumUtils {
 
     private WebDriver driver;
 
+    ElementsUtils elementsUtils=new ElementsUtils(driver);
+
 //    public SeleniumUtils(WebDriver driver) {
 //        this.driver = driver;
 //    }
@@ -58,6 +60,16 @@ public class SeleniumUtils {
 
         element.click();
     }
+
+    public void clickOnElement(By by, String labelName) {
+        WebElement element=elementsUtils.findElement(by);
+        if (element == null)
+            throw new GenericException("Unable to find an element for " + labelName);
+
+        element.click();
+    }
+
+
 
     public void enterDataOnTextBox(WebElement element, String data, String labelName) {
         if (element == null)

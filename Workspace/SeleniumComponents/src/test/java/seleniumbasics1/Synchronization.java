@@ -1,5 +1,6 @@
 package seleniumbasics1;
 
+import framework.ElementsUtils;
 import framework.SeleniumUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,7 +27,8 @@ public class Synchronization {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         //Create object for Util class
-        SeleniumUtils seleniumUtils = new SeleniumUtils(driver);
+        ElementsUtils elementsUtils = new ElementsUtils(driver);
+        SeleniumUtils seleniumUtils = new SeleniumUtils(driver,elementsUtils);
 
         //Using Utils class object call the utilities methods
         seleniumUtils.launchApp("https://practicetestautomation.com/practice-test-login/");

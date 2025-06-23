@@ -16,12 +16,12 @@ public class Reports {
     private WebDriver driver = null;
 
     @SneakyThrows //To automatic handle all exceptions
-    public String takeScreenshotMethod() {
+    public String takeScreenshotMethod(String... imageName) {
         //Takes screenshot
         File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         //System.out.println("Screenshot path is: "+src.getPath());
 
-        File dest = new File(System.getProperty("user.dir") + "//Images.png");
+        File dest = new File(PathUtils.getScreenshotPath(imageName));
 
         // Copy file from source to destination
         Files.copy(src.toPath(), dest.toPath());

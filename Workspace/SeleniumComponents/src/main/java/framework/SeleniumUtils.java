@@ -1,23 +1,26 @@
 package framework;
 
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.nio.file.Files;
+import java.time.Duration;
+import java.util.Optional;
 import java.util.Set;
 
 @AllArgsConstructor //Based on variable declared it creates constructor on runtime
 public class SeleniumUtils {
 
-    private WebDriver driver;
+    WebDriver driver;
+    ElementsUtils elementsUtils;
 
-    ElementsUtils elementsUtils=new ElementsUtils(driver);
+    // ElementsUtils elementsUtils=new ElementsUtils(driver);
 
-//    public SeleniumUtils(WebDriver driver) {
-//        this.driver = driver;
-//    }
+    //public SeleniumUtils(WebDriver driver) {
+    //   this.driver = driver;
+    //}
 
     public String launchAppAndReturnHandle(String url) {
 
@@ -88,6 +91,51 @@ public class SeleniumUtils {
         if (driver != null)
             driver.quit();
 
+    }
+
+    //Optional.ofNullable ->Checks if given object is returning null or not
+    //Whole agenda of Optional is to avoid Null Pointer Exception
+    public Optional<Alert> checkIfAlertIsPresent(int sec) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+        return Optional.ofNullable(wait.until(ExpectedConditions.alertIsPresent()));
+    }
+
+    public void acceptAlert() {
+        checkIfAlertIsPresent(5).ifPresentOrElse(alert -> alert.accept(), () -> {
+            throw new GenericException("Alert is not Present");
+        });
+    }
+
+    public void dismissAlert() {
+        checkIfAlertIsPresent(5).ifPresentOrElse(alert -> alert.dismiss(), () -> {
+            throw new GenericException("Alert is not Present");
+        });
+    }
+
+    public void enterDataIntoAlert(String data) {
+        checkIfAlertIsPresent(5).ifPresentOrElse(alert -> {
+            alert.sendKeys(data);
+            alert.accept();
+        }, () -> {
+            throw new GenericException("Alert is not Present");
+        });
+    }
+
+    public String getTextFromAlert() {
+        return checkIfAlertIsPresent(5).map(Alert::getText).orElseThrow(
+                () -> new GenericException("Alert is not Present"));
+
+    }
+
+    public void performMouseHover(WebElement element) {
+        Actions action = new Actions(driver);
+        action.moveToElement(element).build().perform();
+    }
+
+    public void performDragAndDrop(WebElement source,WebElement destination){
+        Actions action = new Actions(driver);
+        action.pause(3000).dragAndDrop(source, destination).build().perform();
     }
 
 

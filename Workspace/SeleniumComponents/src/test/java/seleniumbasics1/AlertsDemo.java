@@ -25,8 +25,9 @@ public class AlertsDemo {
         driver = BrowserUtils.getDriver(BrowserTypes.CHROME.getBrowser());
 
         //Create object for Util class and Element Util class
-        SeleniumUtils seleniumUtils = new SeleniumUtils(driver);
         ElementsUtils elementsUtils = new ElementsUtils(driver);
+        SeleniumUtils seleniumUtils = new SeleniumUtils(driver,elementsUtils);
+
 
         //Using Utils class object call the utilities methods
         seleniumUtils.launchApp("https://www.tutorialspoint.com/selenium/practice/alerts.php");
@@ -37,19 +38,22 @@ public class AlertsDemo {
         seleniumUtils.clickOnElement(alertButton, "Alert Button");
 
         //Switch to Alert
-        Alert alert = driver.switchTo().alert();
+        //Alert alert = driver.switchTo().alert();
 
         //Print text
-        System.out.println(alert.getText());
+        //System.out.println(alert.getText());
 
         //Accept alert
-        alert.accept();
+       // alert.accept();
 
         //Close alert
-        alert.dismiss();
+        //alert.dismiss();
 
         //Send values to alert
-        alert.sendKeys("Value to send");
+        //alert.sendKeys("Value to send");
+
+        System.out.println(seleniumUtils.getTextFromAlert());
+        seleniumUtils.acceptAlert();
 
 
         seleniumUtils.closeBrowser();

@@ -1,10 +1,7 @@
 package seleniumbasics1;
 
-import framework.BrowserUtils;
-import framework.Reports;
-import framework.SeleniumUtils;
+import framework.*;
 import framework.constants.BrowserTypes;
-import framework.PathUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +22,8 @@ public class FrameworkComponents {
         driver = BrowserUtils.getDriver(BrowserTypes.CHROME.getBrowser());
 
         //Create object for Util class
-        SeleniumUtils seleniumUtils = new SeleniumUtils(driver);
+        ElementsUtils elementsUtils = new ElementsUtils(driver);
+        SeleniumUtils seleniumUtils = new SeleniumUtils(driver,elementsUtils);
 
         //Creates object for Reports class
         Reports reports=new Reports(driver);

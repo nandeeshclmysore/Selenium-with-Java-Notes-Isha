@@ -84,4 +84,37 @@ public class ActionClassDemo {
 
         seleniumUtils.closeBrowser();
     }
+
+    @SneakyThrows
+    @Test
+    public void rightClickTest() {
+        BrowserUtils.killExistingBrowsers();
+
+        //Call enum and get browser value->Call getDriver() to initialize driver
+        driver = BrowserUtils.getDriver(BrowserTypes.CHROME.getBrowser());
+
+        //Create object for Util class and Element Util class
+        ElementsUtils elementsUtils = new ElementsUtils(driver);
+        SeleniumUtils seleniumUtils = new SeleniumUtils(driver, elementsUtils);
+        Reports reports = new Reports(driver);
+
+
+        //Using Utils class object call the utilities methods
+        seleniumUtils.launchApp("https://the-internet.herokuapp.com/context_menu");
+
+        WebElement element = driver.findElement(By.xpath("//div[@id='hot-spot']"));
+
+
+        //Actions actions = new Actions(driver);
+        //actions.pause(3000).contextClick(element).build().perform();
+        seleniumUtils.performRightClick(element);
+
+        System.out.println(seleniumUtils.getTextFromAlert());
+
+        seleniumUtils.acceptAlert();
+
+        seleniumUtils.closeBrowser();
+
+
+    }
 }

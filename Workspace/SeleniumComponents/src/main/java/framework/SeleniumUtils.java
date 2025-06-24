@@ -64,8 +64,17 @@ public class SeleniumUtils {
         element.click();
     }
 
+
     public void clickOnElement(By by, String labelName) {
         WebElement element=elementsUtils.findElement(by);
+        if (element == null)
+            throw new GenericException("Unable to find an element for " + labelName);
+
+        element.click();
+    }
+
+    public void clickOnElement(By by, String labelName, long time) {
+        WebElement element = elementsUtils.findElement(by, time);
         if (element == null)
             throw new GenericException("Unable to find an element for " + labelName);
 
@@ -138,5 +147,57 @@ public class SeleniumUtils {
         action.pause(3000).dragAndDrop(source, destination).build().perform();
     }
 
+    public void performMouseHover(By by) {
+        Actions action = new Actions(driver);
+        action.moveToElement(elementsUtils.findElement(by)).build().perform();
+    }
 
+    public void performDragAndDrop(By source, By destination) {
+        Actions action = new Actions(driver);
+        action.pause(3000).dragAndDrop(elementsUtils.findElement(source), elementsUtils.findElement(destination)).build().perform();
+    }
+
+    public void performMouseHover(By by, long time) {
+        Actions action = new Actions(driver);
+        action.moveToElement(elementsUtils.findElement(by, time)).build().perform();
+    }
+
+    public void performDragAndDrop(By source, By destination, long time) {
+        Actions action = new Actions(driver);
+        action.pause(3000).dragAndDrop(elementsUtils.findElement(source, time), elementsUtils.findElement(destination, time)).build().perform();
+    }
+
+    public void performRightClick(By by, long time) {
+        Actions action = new Actions(driver);
+        action.pause(3000).contextClick(elementsUtils.findElement(by, time)).build().perform();
+    }
+
+    public void performRightClick(By by) {
+        Actions action = new Actions(driver);
+        action.pause(3000).contextClick(elementsUtils.findElement(by)).build().perform();
+    }
+
+    public void performRightClick(WebElement element) {
+        Actions action = new Actions(driver);
+        action.pause(3000).contextClick(element).build().perform();
+    }
+
+    public void performDoubleClick(By by, long time) {
+        Actions action = new Actions(driver);
+        action.pause(3000).doubleClick(elementsUtils.findElement(by, time)).build().perform();
+    }
+
+    public void performDoubleClick(By by) {
+        Actions action = new Actions(driver);
+        action.pause(3000).doubleClick(elementsUtils.findElement(by)).build().perform();
+    }
+
+    public void performDoubleClick(WebElement element) {
+        Actions action = new Actions(driver);
+        action.pause(3000).doubleClick(element).build().perform();
+    }
+
+    public void performVerticalScroll(int x, int y) {
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(" + x + "," + y + ")");
+    }
 }

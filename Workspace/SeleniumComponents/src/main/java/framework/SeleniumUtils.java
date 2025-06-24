@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.swing.text.html.Option;
 import java.time.Duration;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 @AllArgsConstructor //Based on variable declared it creates constructor on runtime
 public class SeleniumUtils {
@@ -58,10 +62,17 @@ public class SeleniumUtils {
     }
 
     public void clickOnElement(WebElement element, String labelName) {
+
         if (element == null)
             throw new GenericException("Unable to find an element for " + labelName);
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            throw new GenericException("Something went wrong on clicking element" + labelName);
+        } catch (StaleElementReferenceException e) {
+            throw new GenericException("Something went wrong, Element got Staled" + labelName);
+        }
 
-        element.click();
     }
 
 
@@ -70,7 +81,13 @@ public class SeleniumUtils {
         if (element == null)
             throw new GenericException("Unable to find an element for " + labelName);
 
-        element.click();
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            throw new GenericException("Something went wrong on clicking element" + labelName);
+        } catch (StaleElementReferenceException e) {
+            throw new GenericException("Something went wrong, Element got Staled" + labelName);
+        }
     }
 
     public void clickOnElement(By by, String labelName, long time) {
@@ -78,7 +95,13 @@ public class SeleniumUtils {
         if (element == null)
             throw new GenericException("Unable to find an element for " + labelName);
 
-        element.click();
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            throw new GenericException("Something went wrong on clicking element" + labelName);
+        } catch (StaleElementReferenceException e) {
+            throw new GenericException("Something went wrong, Element got Staled" + labelName);
+        }
     }
 
 
@@ -197,7 +220,66 @@ public class SeleniumUtils {
         action.pause(3000).doubleClick(element).build().perform();
     }
 
+    //Scrolling using JS
     public void performVerticalScroll(int x, int y) {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(" + x + "," + y + ")");
     }
+
+    //Select dropdown options
+    public void performDropdownSelectionByValue(WebElement element, String value, String label) {
+        Select select = new Select(element);
+
+        try {
+            select.selectByValue(value);
+        } catch (Exception e) {
+            throw new GenericException("Something went wrong in selecting the option" + label);
+        }
+
+    }
+
+    public void performDropdownSelectionByVisibleText(WebElement element, String value, String label) {
+        Select select = new Select(element);
+
+        try {
+            select.selectByVisibleText(value);
+        } catch (Exception e) {
+            throw new GenericException("Something went wrong in selecting the option" + label);
+        }
+
+    }
+
+    public void performDropdownSelectionByIndex(WebElement element, int index, String label) {
+        Select select = new Select(element);
+
+        try {
+            select.selectByIndex(index);
+        } catch (Exception e) {
+            throw new GenericException("Something went wrong in selecting the option" + label);
+        }
+
+    }
+
+    public void performDropdownSelectionByPartialVisibleText(WebElement element, String value, String label) {
+        Select select = new Select(element);
+
+        try {
+            select.deSelectByContainsVisibleText(value);
+        } catch (Exception e) {
+            throw new GenericException("Something went wrong in selecting the option" + label);
+        }
+
+    }
+
+    public void performDropdownRandomSelection(WebElement element,String label) {
+        Select select = new Select(element);
+
+        try {
+            List<WebElement> list = select.getOptions();
+            select.selectByIndex(ThreadLocalRandom.current().nextInt(0, list.size() - 1));
+        } catch (Exception e) {
+            throw new GenericException("Something went wrong in selecting the option" + label);
+        }
+
+    }
+
 }

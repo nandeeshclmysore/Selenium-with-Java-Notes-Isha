@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.swing.text.html.Option;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,9 @@ public class SeleniumUtils {
     //   this.driver = driver;
     //}
 
+    public String performGetTextFromWebelement(WebElement element, String label) {
+        return element.getText();
+    }
     public String launchAppAndReturnHandle(String url) {
 
         if (url.isEmpty() || url.isBlank())
@@ -74,8 +76,7 @@ public class SeleniumUtils {
         }
 
     }
-
-
+    
     public void clickOnElement(By by, String labelName) {
         WebElement element=elementsUtils.findElement(by);
         if (element == null)
@@ -104,8 +105,6 @@ public class SeleniumUtils {
         }
     }
 
-
-
     public void enterDataOnTextBox(WebElement element, String data, String labelName) {
         if (element == null)
             throw new GenericException("Unable to find an element for " + labelName);
@@ -129,8 +128,13 @@ public class SeleniumUtils {
     //Whole agenda of Optional is to avoid Null Pointer Exception
     public Optional<Alert> checkIfAlertIsPresent(int sec) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
-        return Optional.ofNullable(wait.until(ExpectedConditions.alertIsPresent()));
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            return Optional.ofNullable(wait.until(ExpectedConditions.alertIsPresent()));
+        } catch (TimeoutException e) {
+            throw new GenericException("Unable to find an Alert after waiting for " + sec);
+        }
+
     }
 
     public void acceptAlert() {
@@ -282,4 +286,55 @@ public class SeleniumUtils {
 
     }
 
+
+    //FRAMES
+    public void performSwitchToFrame(WebElement element, long sec, String label) {
+
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(sec));
+            Optional.ofNullable(wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element)))
+                    .orElseThrow(() -> new GenericException("Unable to switch to frame " + label));
+
+        } catch (NoSuchFrameException e) {
+            throw new GenericException("Frame " + label + " not Exist");
+        }
+    }
+
+    public void performSwitchToFrame(String idOrName, String label) {
+
+        try {
+            driver.switchTo().frame(idOrName);
+
+        } catch (NoSuchFrameException e) {
+            throw new GenericException("Frame " + label + " not Exist");
+        }
+    }
+
+    public void performSwitchToFrame(int index, String label) {
+
+        try {
+            driver.switchTo().frame(index);
+
+        } catch (NoSuchFrameException e) {
+            throw new GenericException("Frame " + label + " not Exist");
+        }
+    }
+
+    public void performSwitchToFrame(WebElement element, String label) {
+
+        try {
+            driver.switchTo().frame(element);
+
+        } catch (NoSuchFrameException e) {
+            throw new GenericException("Frame " + label + " not Exist");
+        }
+    }
+
+    public void performSwitchToParentFrame() {
+        driver.switchTo().parentFrame();
+    }
+
+    public void performSwitchOutOfAllFrame() {
+        driver.switchTo().defaultContent();
+    }
 }

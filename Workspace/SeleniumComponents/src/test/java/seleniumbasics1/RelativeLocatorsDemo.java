@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import org.testng.annotations.Test;
+import static org.openqa.selenium.support.locators.RelativeLocator.with;
+import static org.openqa.selenium.support.locators.RelativeLocator.RelativeBy;
 
 
 public class RelativeLocatorsDemo {
@@ -34,7 +36,10 @@ public class RelativeLocatorsDemo {
 
         WebElement referenceElement = driver.findElement(By.xpath(" //input[@type='email']"));
 
-        RelativeLocator.RelativeBy by = RelativeLocator.with(By.xpath("//input[@type='tel']")).below(referenceElement);
+        //RelativeLocator.RelativeBy by = RelativeLocator.with(By.xpath("//input[@type='tel']")).below(referenceElement);
+
+        RelativeBy by = with(By.xpath("//input[@type='tel']")).below(referenceElement);
+
 
         driver.findElement(by).sendKeys("9916454100");
 

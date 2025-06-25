@@ -76,7 +76,7 @@ public class SeleniumUtils {
         }
 
     }
-    
+
     public void clickOnElement(By by, String labelName) {
         WebElement element=elementsUtils.findElement(by);
         if (element == null)

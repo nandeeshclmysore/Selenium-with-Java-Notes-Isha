@@ -10,7 +10,14 @@ import java.util.Date;
 @UtilityClass
 public class PathUtils {
 
+    public String resultpath;
 
+    public String generateResultFolder(){
+        File file=new File(System.getProperty("user.dir")+"//Results//"+getCurrentDateTime("dd-MM-yyyy hh-mm-ss-SSS"));
+        file.mkdirs();
+        resultpath=file.getPath();
+        return resultpath;
+    }
     @SneakyThrows //To skip explicitly throwing exception
     public void applySleep(long time) {
         Thread.sleep(time);

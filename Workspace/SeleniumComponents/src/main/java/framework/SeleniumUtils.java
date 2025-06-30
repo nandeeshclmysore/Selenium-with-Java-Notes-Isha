@@ -45,6 +45,11 @@ public class SeleniumUtils {
         driver.manage().window().maximize();
     }
 
+    public void launchAppInFullScreen(String url) {
+        driver.get(url);
+        driver.manage().window().fullscreen();
+    }
+
     public void openNewTabAndSwitchAndLaunchApp(String url) {
         driver.switchTo().newWindow(WindowType.TAB);
         driver.get(url);

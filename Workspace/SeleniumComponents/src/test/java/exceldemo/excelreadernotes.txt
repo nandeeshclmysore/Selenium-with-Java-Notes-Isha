@@ -1,0 +1,56 @@
+✅ OVERALL GOAL
+To read Excel data as Map<String, String>, filter rows (e.g., RunMode = Y), and use it in a TestNG @DataProvider test.
+
+🔧 METHOD 1: readExcelAsMap(...) — Excel Reader Utility
+📌 Purpose:
+Reads Excel file
+
+Uses first row as header
+
+Returns data as List<Map<String, String>>
+
+✅ Key Steps:
+Use Apache POI to open Excel.
+
+Read headers from first row.
+
+For every data row:
+
+Map each cell to its header
+
+Trim and clean values
+
+Return data list.
+
+🔧 METHOD 2: @DataProvider in Test Class
+📌 Purpose:
+Converts the List<Map<String, String>> into Object[][] format
+
+Used to supply data to your @Test methods
+
+✅ Key Steps:
+Call readExcelAsMap(...) from utility.
+
+Loop through list and build Object[][] with one map per row.
+
+Return Object[][] from the @DataProvider.
+
+🔧 METHOD 3: @Test method with Map<String, String>
+📌 Purpose:
+Consumes each data row as a map
+
+Can directly access data.get("username"), etc.
+
+✅ Key Steps:
+Annotate test with @Test(dataProvider = "excelData")
+
+Accept Map<String, String> as argument.
+
+Use keys to retrieve values and run your Selenium tests.
+
+💡 BONUS TIPS:
+Use .toLowerCase() while reading headers to avoid case mismatches.
+
+Use .trim() everywhere to avoid issues with spaces.
+
+You can easily extend filtering (e.g., RunMode = Y) using conditions inside readExcelAsMap().

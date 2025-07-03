@@ -42,4 +42,8 @@ public class PathUtils {
         }
     }
 
+    public String getDownloadFolder(){
+        return System.getProperty("user.dir")+"//Downloads";
+    }
+
 }

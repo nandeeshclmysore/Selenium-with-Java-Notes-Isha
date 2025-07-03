@@ -28,7 +28,28 @@ public class PropertiesUtil {
         return propertiesConfiguration.getString(key,key+" Not Found");
     }
 
-    public String getURL(){
+    // ✅ Add all these public getters
+    public String getURL() {
         return getProperty("URL");
     }
+
+    public String getIncognitoMode() {
+        return getProperty("incognito"); // e.g., yes or no
+    }
+
+    public String getHeadlessMode() {
+        return getProperty("headless");  // e.g., yes or no
+    }
+
+    public String getBrowser() {
+        return getProperty("browser");   // e.g., chrome, firefox, edge
+    }
+
+//    public String getDownloadFolder() {
+//        return getProperty("download.folder");  // optional: custom folder path
+//    }
+
+
+
+
 }

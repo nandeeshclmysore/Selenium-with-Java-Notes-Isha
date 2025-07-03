@@ -1,5 +1,6 @@
 package exceldemo;
 
+import framework.ExcelUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,7 @@ public class DataReaderDemo {
         String filterKey = "RunMode";
         String filterValue = "Y";
 
-        List<Map<String, String>> excelData = ExcelUtilitiesDemo.readExcelAsMap(path, sheetName, filterKey, filterValue);
+        List<Map<String, String>> excelData = ExcelUtils.readExcelAsMap(path, sheetName, filterKey, filterValue);
 
         Object[][] testData = new Object[excelData.size()][1];
         for (int i = 0; i < excelData.size(); i++) {

@@ -46,4 +46,8 @@ public class PathUtils {
         return System.getProperty("user.dir")+"//Downloads";
     }
 
+    public String getTestDataFolder(){
+        return System.getProperty("user.dir")+"//src//test//resources//TestData";
+    }
+
 }

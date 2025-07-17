@@ -11,7 +11,8 @@ public class DataReaderDemo {
 
     @DataProvider(name = "excelData")
     public Object[][] getTestDataFromExcel() {
-        String path = "C:\\Users\\003J72744\\Desktop\\TestingAcademyAT\\SeleniumIsha\\JavaSeleniumNotes\\Workspace\\SeleniumComponents\\src\\test\\java\\exceldemo\\LoginData.xlsx";
+        String path = "C:\\Users\\003J72744\\Desktop\\TestingAcademyAT\\SeleniumIsha\\JavaSeleniumNotes\\Workspace\\SeleniumComponents\\src\\test\\resources\\TestData\\SampleTestData.xlsx";
+
         String sheetName = "Sheet1";
         String filterKey = "RunMode";
         String filterValue = "Y";

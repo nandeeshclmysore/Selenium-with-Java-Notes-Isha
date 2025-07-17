@@ -117,15 +117,31 @@ public class SeleniumUtils {
         element.sendKeys(data);
     }
 
+    public void enterDataOnTextBox(By by, String data, String labelName) {
+        WebElement element = elementsUtils.findElement(by);
+        if (element == null)
+            throw new GenericException("Unable to find an element for " + labelName);
+
+        element.sendKeys(data);
+    }
+
     public void closeBrowser() {
-        if (driver != null)
+        try {
+            Thread.sleep(1000);
             driver.close();
+        } catch (Exception e) {
+            System.out.println("Browser already closed: " + e.getMessage());
+        }
 
     }
 
     public void closeAllBrowsers() {
-        if (driver != null)
+        try {
+            Thread.sleep(1000);
             driver.quit();
+        } catch (Exception e) {
+            System.out.println("Browser already closed: " + e.getMessage());
+        }
 
     }
 

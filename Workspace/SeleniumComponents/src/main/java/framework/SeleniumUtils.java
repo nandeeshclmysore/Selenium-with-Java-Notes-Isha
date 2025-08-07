@@ -262,6 +262,18 @@ public class SeleniumUtils {
 
     }
 
+    public void performDropdownSelectionByValue(By by, String value, String label) {
+        Select select = new Select(elementsUtils.findElement(by));
+
+        try {
+            select.selectByValue(value);
+        } catch (Exception e) {
+            throw new GenericException("Something went wrong in selecting the option" + label);
+        }
+
+    }
+
+
     public void performDropdownSelectionByVisibleText(WebElement element, String value, String label) {
         Select select = new Select(element);
 

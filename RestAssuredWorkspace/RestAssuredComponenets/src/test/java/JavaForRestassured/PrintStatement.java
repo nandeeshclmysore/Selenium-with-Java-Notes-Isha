@@ -1,6 +1,6 @@
 package JavaForRestassured;
 
-public class HeloWorld {
+public class PrintStatement {
     public static void main(String[] args) {
 
         System.out.println("Hello World !!");
@@ -12,6 +12,17 @@ public class HeloWorld {
         System.out.println(555 + 555+" Sum is"+6666+666); //1110 Sum is6666666
 
         System.out.println((555 + 555)+" Sum is"+(6666+666)); //1110 Sum is7332
+
+        System.out.println('A'+10);
+        System.out.println('A');
+
+        //Char is converted to Ascii value and do operation and then concatenate with String
+        System.out.println('A'+'B'+33+" Sum");
+
+        //Executed as last statement
+        System.err.println("Error Message");
+
+        System.out.println("Hello Worlds");
 
     }
 }

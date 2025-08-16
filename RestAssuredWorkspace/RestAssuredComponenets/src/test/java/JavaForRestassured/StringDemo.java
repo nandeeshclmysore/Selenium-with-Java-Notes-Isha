@@ -42,6 +42,18 @@ public class StringDemo {
 
         System.out.println("End of Apps");
 
+        //Multiline String
+        String str = """ 
+                sadsad 
+                adsadsa
+                asdsada
+                """;
+
+        System.out.println(str);
+
+        String s5 = """
+                Sum of two number %d %d is %d""".formatted(2, 33, (2 + 33));
+        System.out.println(s5);
 
     }
 }

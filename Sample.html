@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IBM Multi-Select</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .dropdown {
+      width: 280px;
+      border: 1px solid #888;
+      border-radius: 6px;
+      padding: 10px;
+      cursor: pointer;
+      position: relative;
+      background: #f9f9f9;
+    }
+    .dropdown .selected {
+      font-weight: bold;
+      color: #333;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      border: 1px solid #888;
+      border-radius: 5px;
+      background: #fff;
+      z-index: 1000;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .dropdown.open .dropdown-content { display: block; }
+    .dropdown-content ul { list-style: none; padding: 0; margin: 0; }
+    .dropdown-content li {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+    .dropdown-content li:hover { background: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h2>IBM Multi-Select</h2>
+
+  <div class="dropdown" id="multiSelect">
+    <div class="selected">Select options</div>
+    <div class="dropdown-content">
+      <ul>
+        <li><span class="option-label">Apple</span></li>
+        <li><span class="option-label">Banana</span></li>
+        <li><span class="option-label">Apple</span></li>
+        <li><span class="option-label">Cherry</span></li>
+        <li><span class="option-label">Banana</span></li>
+        <li><span class="option-label">Date</span></li>
+        <li><span class="option-label">Grapes</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const dropdown = document.getElementById("multiSelect");
+    const selected = dropdown.querySelector(".selected");
+    const options = dropdown.querySelectorAll(".dropdown-content li");
+    let chosen = [];
+
+    dropdown.addEventListener("click", () => {
+      dropdown.classList.toggle("open");
+    });
+
+    options.forEach(opt => {
+      opt.addEventListener("click", (e) => {
+        e.stopPropagation(); 
+        const text = opt.innerText.trim();
+        if (chosen.includes(text)) {
+          chosen = chosen.filter(item => item !== text);
+        } else {
+          chosen.push(text);
+        }
+        selected.textContent = chosen.length ? chosen.join(", ") : "Select options";
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("open");
+      }
+    });
+  </script>
+</body>
+</html>
